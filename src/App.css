@@ -1,0 +1,48 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+.App{
+  margin: 17px  344px;
+  border: 3px solid #352929;
+  padding: 25px 25px;
+  text-shadow: 1px 1px 2px yellow;
+  justify-content: space-between;
+  
+
+  
+ 
+}
+.doList{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  
+}
+.to-do-list-container{
+  display: flex;
+  flex-direction: column;
+  
+}
+.to-do-list-container ul li {
+  width: 170px;
+  overflow-wrap: break-word;
+  list-style-type: "👉";
+  cursor: pointer;
+}
+.done{
+  text-decoration: line-through;
+
+}
+.btnDelete{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.btnAdd{
+  background-color: #888383;
+  color: aliceblue;
+  text-shadow: 1px 1px 2px yellow;
+}
+

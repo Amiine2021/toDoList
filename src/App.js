@@ -7,33 +7,64 @@ function App() {
   const inputRef = useRef()
 
 
-  function handleAddToDo(){
+  const  handleAddToDo = () => {
     const text = inputRef.current.value;
-    setTodos([...todos, text])
+    const newItem = {completed: false , text}
+    setTodos([...todos, newItem])
     inputRef.current.value = "";
     console.log(text)
     
 
   }
- 
+ const handleItemDone = (index) =>{
+
+    const newTodos = [...todos]
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos)
+    console.log(newTodos)
+
+ }
+
+ const handleItemDelete = (index) => {
+      const  newTodos = [...todos];
+      newTodos.splice(index,1)
+      setTodos(newTodos)
+
+
+
+ }
 
 
   return (
     <div className="App">
-      <h1>To Do List</h1>
-      <ul>
-        
-        {todos.map((item) =>{
-                return <li>{item}  <button id='delete' style={{
-                  color:"red",
-                  alignItems:"center"
-                }}>X</button></li>
-        })}
-       
-      </ul>
+      <h2 className='doList'>To Do List</h2>
+      <div className='to-do-list-container'>
+              <ul>  
+                      
+                      {todos.map(({text, completed}, index) =>{
+                              return (
+                              <div className='btnDelete'>
+                                   
+                                <li  className={completed ? "done" : ""}                  key={index} onClick={ () =>  handleItemDone(index)}>{text}  </li>
+                                <span onClick={ () =>handleItemDelete(index)}>❌ </span>
+                              </div>) 
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                      })}
+                    
+              </ul>
+                    
+              <input ref={inputRef}  placeholder='Enter your infos..'  />
+              
+              <button className='btnAdd' onClick={handleAddToDo}>ADD</button>
+      </div>
       
-      <input ref={inputRef}  placeholder='Enter your infos..'  />
-      <button onClick={handleAddToDo}>Add</button>
      
     </div>
   );
