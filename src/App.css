@@ -3,22 +3,23 @@
   margin: 0;
 }
 .App{
+  display: flex;
+  flex-direction: column;
   margin: 17px  344px;
   border: 3px solid #352929;
+  border-radius: 4px;
   padding: 25px 25px;
-  text-shadow: 1px 1px 2px yellow;
   justify-content: space-between;
-  
+  box-sizing: border-box;
+  overflow:initial;
+  background: #161616;
+  color: #fff;
+  font-family: 'Source Code Pro', monospace;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  margin: 2rem;
+}
 
-  
- 
-}
-.doList{
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 50px;
-  
-}
 .to-do-list-container{
   display: flex;
   flex-direction: column;
@@ -43,6 +44,46 @@
 .btnAdd{
   background-color: #888383;
   color: aliceblue;
-  text-shadow: 1px 1px 2px yellow;
+
 }
 
+
+
+
+/* CSS */
+
+.taskSpan{
+  color: black;
+  background-color: yellow;
+  text-align: center;
+  font-family: 'Source Code Pro', monospace;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  border-radius: 5px;
+}
+.btn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.btn_add{
+  width: 200px;
+  height: 30px;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  
+}
+.btn_clr{
+  width: 200px;
+  height: 30px;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+}
+.inpt{
+  height: 20px;
+}

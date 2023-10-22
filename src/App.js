@@ -1,27 +1,62 @@
-import { useState,useRef } from 'react';
+import { useState,useRef, useEffect } from 'react';
 import './App.css';
+
+
+
+
+
+
 
 function App() {
 
+ 
   const [todos,setTodos] = useState([])
   const inputRef = useRef()
 
+  useEffect(()=>{
+    if(localStorage.getItem("task")){
+      const storedList = JSON.parse(localStorage.getItem("task"));
+      setTodos(storedList)
+    }
+  },[])
 
-  const  handleAddToDo = () => {
+
+
+  
+
+
+
+    const  handleAddToDo = () => {
+    
     const text = inputRef.current.value;
     const newItem = {completed: false , text}
-    setTodos([...todos, newItem])
-    inputRef.current.value = "";
+    if(text){
+      setTodos([...todos, newItem])
+      localStorage.setItem("task", JSON.stringify([...todos,newItem]))
+    } else {
+      return [];
+    }
+    
+    
+    
+   
+  
+    
+    // const data = localStorage.setItem('data',text)
     console.log(text)
+    inputRef.current.value = "";
+
+    // console.log(data)
     
 
   }
- const handleItemDone = (index) =>{
 
+ const handleItemDone = (index) =>{
+    
     const newTodos = [...todos]
     newTodos[index].completed = !newTodos[index].completed;
     setTodos(newTodos)
-    console.log(newTodos)
+    
 
  }
 
@@ -29,25 +64,31 @@ function App() {
       const  newTodos = [...todos];
       newTodos.splice(index,1)
       setTodos(newTodos)
+      localStorage.getItem("task",)
+}
+const clearData = () =>{
+    setTodos([]);
+    localStorage.removeItem("task")
 
 
-
- }
+}
 
 
   return (
     <div className="App">
-      <h2 className='doList'>To Do List</h2>
+      <h2 >To Do List</h2>
       <div className='to-do-list-container'>
               <ul>  
                       
                       {todos.map(({text, completed}, index) =>{
                               return (
                               <div className='btnDelete'>
-                                   
-                                <li  className={completed ? "done" : ""}                  key={index} onClick={ () =>  handleItemDone(index)}>{text}  </li>
-                                <span onClick={ () =>handleItemDelete(index)}>❌ </span>
-                              </div>) 
+                               
+                                <li  className={completed ? "done" : ""}      key={index} onClick={ () =>  handleItemDone(index)}>{text}  </li>
+                               
+                                <span onClick={ () =>handleItemDelete(index)}>🗑️</span>
+                              </div>
+                              ) 
                               
                               
                               
@@ -59,12 +100,24 @@ function App() {
                       })}
                     
               </ul>
-                    
-              <input ref={inputRef}  placeholder='Enter your infos..'  />
               
-              <button className='btnAdd' onClick={handleAddToDo}>ADD</button>
-      </div>
+              <input className='inpt' ref={inputRef}  placeholder='Enter your infos..'  />
+              <span className='taskSpan'>{!todos.length? 'No Task' : todos.length === 1?
+              "1 task ": todos.length > 1? `${todos.length} tasks` : null
+              
+              } </span>   
+             <div className='btn'>
+                <button className='btn_add'  onClick={handleAddToDo}>ADD</button>  {!todos.length? null: 
+                <button className='btn_clr' onClick={clearData}>Clear All</button>
+      }
       
+             </div>
+
+           
+              
+              
+      </div>
+     
      
     </div>
   );
