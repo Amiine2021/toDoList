@@ -22,7 +22,6 @@ function App() {
 
 
 
-  
 
 
 
@@ -72,6 +71,14 @@ const clearData = () =>{
 
 
 }
+const onKeyPressEnter = (e) =>{
+  if(e.keyCode === 13){
+    handleAddToDo()
+  }
+   
+
+}
+
 
 
   return (
@@ -101,7 +108,7 @@ const clearData = () =>{
                     
               </ul>
               
-              <input className='inpt' ref={inputRef}  placeholder='Enter your infos..'  />
+              <input className='inpt'  onKeyUp={onKeyPressEnter}  ref={inputRef}  placeholder='Enter your infos..'  />
               <span className='taskSpan'>{!todos.length? 'No Task' : todos.length === 1?
               "1 task ": todos.length > 1? `${todos.length} tasks` : null
               
